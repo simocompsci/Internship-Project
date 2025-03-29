@@ -93,7 +93,6 @@ const UsersTable = () => {
 		setFormData({
 			name: "",
 			email: "",
-			password: "",
 			role: "customer",
 			status: "active",
 		});
@@ -111,7 +110,6 @@ const UsersTable = () => {
 			setFormData({
 				name: "",
 				email: "",
-				password: "",
 				role: "customer",
 				status: "active",
 			});
@@ -131,7 +129,6 @@ const UsersTable = () => {
 		setFormData({
 			name: user.name,
 			email: user.email,
-			password: "", // Don't populate password
 			role: user.role,
 			status: user.status,
 		});
@@ -452,21 +449,6 @@ const UsersTable = () => {
 						</div>
 
 						<div>
-							<label htmlFor="password" className="block text-sm font-medium text-gray-300">
-								Password
-							</label>
-							<input
-								type="password"
-								id="password"
-								name="password"
-								value={formData.password}
-								onChange={handleInputChange}
-								required
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
-							/>
-						</div>
-
-						<div>
 							<label htmlFor="role" className="block text-sm font-medium text-gray-300">
 								Role
 							</label>
@@ -552,20 +534,6 @@ const UsersTable = () => {
 								value={formData.email}
 								onChange={handleInputChange}
 								required
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
-							/>
-						</div>
-
-						<div>
-							<label htmlFor="edit-password" className="block text-sm font-medium text-gray-300">
-								Password
-							</label>
-							<input
-								type="password"
-								id="edit-password"
-								name="password"
-								value={formData.password}
-								onChange={handleInputChange}
 								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
 							/>
 						</div>
