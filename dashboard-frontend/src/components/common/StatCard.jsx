@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const StatCard = ({ name, icon: Icon, value, color }) => {
 	return (
 		<motion.div
-			className='bg-gray-300 overflow-hidden text-gray-800 shadow-lg rounded-xl border border-gray-300'
+			className='bg-gray-100 overflow-hidden text-gray-800 shadow-lg rounded-xl border border-gray-300'
 			whileHover={{ y: -5 }}
 		>
 			<div className='px-4 py-5 sm:p-6'>
