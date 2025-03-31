@@ -12,7 +12,7 @@ const fallbackCategoryData = [
 	{ name: "Sports & Outdoors", value: 1900 },
 ];
 
-const COLORS =  ["#72b7ef", " #439ee7", "#1c95a1", "#3b7b82", "#118ac1" , "#8bd7f9"];
+const COLORS = ["#72b7ef", "#439ee7", "#1c95a1", "#3b7b82", "#118ac1", "#8bd7f9", "#2c5282"];
 
 const CategoryDistributionChart = () => {
 	const [categoryData, setCategoryData] = useState([]);
@@ -44,16 +44,16 @@ const CategoryDistributionChart = () => {
 
 	return (
 		<motion.div
-			className='bg-success bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6'
+			className='bg-gray-300 shadow-lg rounded-xl p-6'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>Category Distribution</h2>
+			<h2 className='text-lg font-medium mb-4 text-gray-800'>Category Distribution</h2>
 			<div className='h-80'>
 				{loading ? (
 					<div className="flex items-center justify-center h-full">
-						<p className="text-gray-400">Loading chart data...</p>
+						<p className="text-gray-600">Loading chart data...</p>
 					</div>
 				) : (
 					<ResponsiveContainer width={"100%"} height={"100%"}>
@@ -77,10 +77,13 @@ const CategoryDistributionChart = () => {
 							</Pie>
 							<Tooltip
 								contentStyle={{
-									backgroundColor: "rgba(26, 110, 57, 0.8)",
-									borderColor: "emerald",
+									backgroundColor: "#72b7ef",
+									borderRadius: "8px",
+									boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+									border: "none",
+									padding: "12px"
 								}}
-								itemStyle={{ color: "white" }}
+								itemStyle={{ color: "#1F2937" }}
 								formatter={(value) => [`$${value.toLocaleString()}`, "Sales"]}
 							/>
 							<Legend />

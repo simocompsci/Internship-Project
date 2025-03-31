@@ -67,20 +67,20 @@ const SalesPage = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					<StatCard name='Total Revenue' icon={DollarSign} value={stats.totalRevenue} color='green' />
+					<StatCard name='Total Revenue' icon={DollarSign} value={stats.totalRevenue} color='#72b7ef' />
 					<StatCard
 						name='Avg. Order Value'
 						icon={ShoppingCart}
 						value={stats.averageOrderValue}
-						color='green'
+						color='#72b7ef'
 					/>
 					<StatCard
 						name='Total Orders'
 						icon={TrendingUp}
 						value={stats.totalOrders  }
-						color='green'
+						color='#72b7ef'
 					/>
-					<StatCard name='Sales Growth' icon={CreditCard} value={stats.revenueGrowth} color='green' />
+					<StatCard name='Sales Growth' icon={CreditCard} value={stats.revenueGrowth} color='#72b7ef' />
 				</motion.div>
 
 				<SalesOverviewChart />

@@ -13,7 +13,7 @@ const fallbackChannelData = [
 	{ name: "Referral", value: 1890 },
 	{ name: "Email", value: 2390 },
 ];
-const COLORS =  ["#72b7ef", " #439ee7", "#1c95a1", "#3b7b82", "#118ac1" , "#8bd7f9"];
+const COLORS =  ["#72b7ef", "#439ee7", "#1c95a1", "#3b7b82", "#118ac1", "#8bd7f9", "#2c5282"];
 
 const ChannelPerformance = () => {
 	const [channelData, setChannelData] = useState([]);
@@ -57,13 +57,13 @@ const ChannelPerformance = () => {
 
 	return (
 		<motion.div
-			className='bg-success bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg rounded-xl p-6'
+			className='bg-gray-300 shadow-lg rounded-xl p-6'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
 			<div className="flex justify-between items-center mb-4">
-				<h2 className='text-xl font-semibold text-gray-100'>Channel Performance</h2>
+				<h2 className='text-xl font-semibold text-gray-800'>Channel Performance</h2>
 				{error && (
 					<button 
 						onClick={fetchChannelData}
@@ -95,7 +95,7 @@ const ChannelPerformance = () => {
 								cx='50%'
 								cy='50%'
 								innerRadius = '25%'
-								stroke="#8bd7f9"
+								stroke="#3b7b82"
 								outerRadius={100}
 								fill='#8884d8'
 								dataKey='value'

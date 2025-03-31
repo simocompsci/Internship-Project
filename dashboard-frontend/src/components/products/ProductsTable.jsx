@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, Plus, ChevronLeft, ChevronRight, Edit, Trash2 } from "lucide-react";
 import { productService } from "../../services/api";
-import { handleApiError, fallbackData } from "../../utils/apiUtils";
 import Modal from "../common/Modal";
 
 const ProductsTable = () => {
@@ -186,7 +185,7 @@ const ProductsTable = () => {
     return (
         <>
             <motion.div
-                className="bg-success shadow-lg rounded-xl p-6"
+                className="bg-gray-300 shadow-lg rounded-xl p-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -198,16 +197,16 @@ const ProductsTable = () => {
                             <input
                                 type="text"
                                 placeholder="Search products..."
-                                className="bg-emerald-600 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                className="bg-gray-400 bg-opacity-15  text-black placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
                                 value={searchTerm}
                                 onChange={handleSearch}
                             />
-                            <Search className="absolute left-3 top-2.5 text-gray-50" size={18} />
+                            <Search className="absolute left-3 top-2.5 text-gray-600" size={18} />
                         </div>
                         <button
                             onClick={openCreateModal}
                             className={`${
-                                apiAvailable ? "bg-primary hover:bg-primary/85" : "bg-gray-600 cursor-not-allowed"
+                                apiAvailable ? "bg-[#118ac1] hover:bg-[#118ac1]/50" : "bg-gray-600 cursor-not-allowed"
 							} text-white px-4 py-2 rounded-lg flex items-center`}
                         >
                             <Plus size={18} className="mr-1" /> Add Product
@@ -218,14 +217,14 @@ const ProductsTable = () => {
                 <div className="overflow-x-auto">
                     {loading ? (
                         <div className="text-center py-4">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500 mx-auto"></div>
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500 mx-auto"></div>
                             <p className="mt-2 text-gray-400">Loading products...</p>
                         </div>
                     ) : (
                         <>
                             <table className="min-w-full border-separate border-spacing-y-1 border-spacing-x-0">
                                 <thead>
-                                    <tr className="bg-emerald-600">
+                                    <tr className="bg-gray-900">
                                         <th className='px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider rounded-s-lg'>
                                             Name
                                         </th>
@@ -261,7 +260,7 @@ const ProductsTable = () => {
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 transition={{ duration: 0.3 }}
-                                                className={`${index % 2 === 0 ? 'bg-success' : 'bg-success-400'} overflow-hidden rounded-xl`}
+                                                className={`${index % 2 === 0 ? 'bg-gray-400 bg-opacity-10' : 'bg-gray-100'} overflow-hidden rounded-xl`}
                                             >
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 rounded-l-xl">
 													<div className="flex gap-2 items-cente">
@@ -271,18 +270,18 @@ const ProductsTable = () => {
 													</div>
 												</td>
 
-                                                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                                                <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
                                                     {product.category}
                                                 </td>
 
-                                                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                                                <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
                                                     ${parseFloat(product.price).toFixed(2)}
                                                 </td>
-                                                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{product.stock}</td>
-                                                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>{product.sales || 0}</td>
+                                                <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>{product.stock}</td>
+                                                <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>{product.sales || 0}</td>
                                                 <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 rounded-r-xl'>
                                                     <button 
-                                                        className='text-green-900 hover:text-green-500 mr-2'
+                                                        className='text-blue-900 hover:text-blue-500 mr-2'
                                                         onClick={() => openEditModal(product)}
                                                     >
                                                         <Edit size={20} />
@@ -303,14 +302,14 @@ const ProductsTable = () => {
                             {/* Pagination Controls */}
                             {filteredProducts.length > 0 && (
                                 <div className="flex items-center justify-between mt-4 px-2">
-                                    <div className="text-md text-gray-700">
+                                    <div className="text-md text-gray-900">
                                         Showing {indexOfFirstProduct + 1} to {Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
                                     </div>
                                     <div className="flex space-x-2">
                                         <button 
                                             onClick={prevPage} 
                                             disabled={currentPage === 1}
-                                            className={`p-2 rounded-md ${currentPage === 1 ? 'text-gray-50 cursor-not-allowed' : 'text-gray-300 hover:bg-emerald-700'}`}
+                                            className={`p-2 rounded-md ${currentPage === 1 ? 'text-gray-900 cursor-not-allowed' : 'text-gray-50 hover:bg-gray-900'}`}
                                         >
                                             <ChevronLeft size={18} />
                                         </button>
@@ -323,8 +322,8 @@ const ProductsTable = () => {
                                                     onClick={() => paginate(number + 1)}
                                                     className={`px-3 py-1 rounded-md ${
                                                         currentPage === number + 1 
-                                                            ? 'bg-emerald-600 text-white' 
-                                                            : 'text-gray-300 hover:bg-emerald-700'
+                                                            ? 'bg-gray-900 text-white' 
+                                                            : 'text-gray-300 hover:bg-gray-700'
                                                     }`}
                                                 >
                                                     {number + 1}
@@ -335,7 +334,7 @@ const ProductsTable = () => {
                                         <button 
                                             onClick={nextPage} 
                                             disabled={currentPage === totalPages}
-                                            className={`p-2 rounded-md ${currentPage === totalPages ? 'text-gray-50 cursor-not-allowed' : 'text-gray-300 hover:bg-emerald-700'}`}
+                                            className={`p-2 rounded-md ${currentPage === totalPages ? 'text-gray-900 cursor-not-allowed' : 'text-gray-50 hover:bg-gray-700'}`}
                                         >
                                             <ChevronRight size={18} />
                                         </button>
@@ -356,7 +355,7 @@ const ProductsTable = () => {
                 <form onSubmit={handleCreateProduct}>
                     <div className="space-y-4">
                         <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-300">Name</label>
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-900">Name</label>
                             <input
                                 type="text"
                                 id="name"
@@ -364,12 +363,12 @@ const ProductsTable = () => {
                                 value={formData.name}
                                 onChange={handleInputChange}
                                 required
-                                className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+                                className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black  shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
                             />
                         </div>
                         
                         <div>
-                            <label htmlFor="category" className="block text-sm font-medium text-gray-300">Category</label>
+                            <label htmlFor="category" className="block text-sm font-medium text-gray-900">Category</label>
                             <input
                                 type="text"
                                 id="category"
@@ -377,12 +376,12 @@ const ProductsTable = () => {
                                 value={formData.category}
                                 onChange={handleInputChange}
                                 required
-                                className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+                                className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
                             />
                         </div>
                         
                         <div>
-                            <label htmlFor="price" className="block text-sm font-medium text-gray-300">Price</label>
+                            <label htmlFor="price" className="block text-sm font-medium text-gray-900">Price</label>
                             <input
                                 type="number"
                                 step="0.01"
@@ -391,12 +390,12 @@ const ProductsTable = () => {
                                 value={formData.price}
                                 onChange={handleInputChange}
                                 required
-                                className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black  shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
                         </div>
                         
                         <div>
-                            <label htmlFor="stock" className="block text-sm font-medium text-gray-300">Stock</label>
+                            <label htmlFor="stock" className="block text-sm font-medium text-gray-900">Stock</label>
                             <input
                                 type="number"
                                 id="stock"
@@ -404,19 +403,19 @@ const ProductsTable = () => {
                                 value={formData.stock}
                                 onChange={handleInputChange}
                                 required
-                                className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
                         </div>
                         
                         <div>
-                            <label htmlFor="image_url" className="block text-sm font-medium text-gray-300">Image URL</label>
+                            <label htmlFor="image_url" className="block text-sm font-medium text-gray-900">Image URL</label>
                             <input
                                 type="text"
                                 id="image_url"
                                 name="image_url"
                                 value={formData.image_url}
                                 onChange={handleInputChange}
-                                className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+                                className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
                             />
                         </div>
                     </div>
@@ -431,7 +430,7 @@ const ProductsTable = () => {
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 bg-green-900 text-white rounded-md hover:bg-emerald-700"
+                            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-500"
                         >
                             Create Product
                         </button>
@@ -449,7 +448,7 @@ const ProductsTable = () => {
                     <form onSubmit={handleUpdateProduct}>
                         <div className="space-y-4">
                             <div>
-                                <label htmlFor="edit-name" className="block text-sm font-medium text-gray-300">Name</label>
+                                <label htmlFor="edit-name" className="block text-sm font-medium text-gray-900">Name</label>
                                 <input
                                     type="text"
                                     id="edit-name"
@@ -457,12 +456,12 @@ const ProductsTable = () => {
                                     value={formData.name}
                                     onChange={handleInputChange}
                                     required
-                                    className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+                                    className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
                                 />
                             </div>
                             
                             <div>
-                                <label htmlFor="edit-category" className="block text-sm font-medium text-gray-300">Category</label>
+                                <label htmlFor="edit-category" className="block text-sm font-medium text-gray-900">Category</label>
                                 <input
                                     type="text"
                                     id="edit-category"
@@ -470,12 +469,12 @@ const ProductsTable = () => {
                                     value={formData.category}
                                     onChange={handleInputChange}
                                     required
-                                    className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+                                    className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
                                 />
                             </div>
                             
                             <div>
-                                <label htmlFor="edit-price" className="block text-sm font-medium text-gray-300">Price</label>
+                                <label htmlFor="edit-price" className="block text-sm font-medium text-gray-900">Price</label>
                                 <input
                                     type="number"
                                     step="0.01"
@@ -484,12 +483,12 @@ const ProductsTable = () => {
                                     value={formData.price}
                                     onChange={handleInputChange}
                                     required
-                                    className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                    className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 />
                             </div>
                             
                             <div>
-                                <label htmlFor="edit-stock" className="block text-sm font-medium text-gray-300">Stock</label>
+                                <label htmlFor="edit-stock" className="block text-sm font-medium text-gray-900">Stock</label>
                                 <input
                                     type="number"
                                     id="edit-stock"
@@ -497,19 +496,19 @@ const ProductsTable = () => {
                                     value={formData.stock}
                                     onChange={handleInputChange}
                                     required
-                                    className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                    className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 />
                             </div>
                             
                             <div>
-                                <label htmlFor="edit-image_url" className="block text-sm font-medium text-gray-300">Image URL</label>
+                                <label htmlFor="edit-image_url" className="block text-sm font-medium text-gray-900">Image URL</label>
                                 <input
                                     type="text"
                                     id="edit-image_url"
                                     name="image_url"
                                     value={formData.image_url}
                                     onChange={handleInputChange}
-                                    className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+                                    className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
                                 />
                             </div>
                         </div>
@@ -524,7 +523,7 @@ const ProductsTable = () => {
                             </button>
                             <button
                                 type="submit"
-                                className="px-4 py-2 bg-green-900 text-white rounded-md hover:bg-emerald-700"
+                                className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-500"
                             >
                                 Update Product
                             </button>
@@ -541,7 +540,7 @@ const ProductsTable = () => {
             >
                 {currentProduct && (
                     <div>
-                        <p className="text-gray-300 mb-4">
+                        <p className="text-gray-900 mb-4">
                             Are you sure you want to delete <span className="font-semibold">{currentProduct.name}</span>? This action cannot be undone.
                         </p>
                         

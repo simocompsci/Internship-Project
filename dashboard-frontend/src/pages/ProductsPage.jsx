@@ -57,25 +57,25 @@ const ProductsPage = () => {
 						name='Total Products' 
 						icon={Package} 
 						value={loading ? "Loading..." : productStats.totalProducts} 
-						color='green' 
+						color='#72b7ef' 
 					/>
 					<StatCard 
 						name='Existing Products' 
 						icon={TrendingUp} 
 						value={loading ? "Loading..." : productStats.activeProducts} 
-						color='green' 
+						color='#72b7ef' 
 					/>
 					<StatCard 
 						name='Out of Stock' 
 						icon={AlertTriangle} 
 						value={loading ? "Loading..." : productStats.outOfStockProducts} 
-						color='green' 
+						color='#72b7ef' 
 					/>
 					<StatCard 
 						name='Featured Products' 
 						icon={Star} 
 						value={loading ? "Loading..." : productStats.featuredProducts} 
-						color='green' 
+						color='#72b7ef' 
 					/>
 				</motion.div>
 

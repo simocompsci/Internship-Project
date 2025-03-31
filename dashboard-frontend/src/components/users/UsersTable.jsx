@@ -210,7 +210,7 @@ const UsersTable = () => {
 	return (
 		<>
 			<motion.div
-				className="bg-success  shadow-lg rounded-xl p-6 "
+				className="bg-gray-300 shadow-lg rounded-xl p-6"
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2 }}
@@ -222,17 +222,15 @@ const UsersTable = () => {
 							<input
 								type="text"
 								placeholder="Search users..."
-								className="bg-emerald-600 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+								className="bg-gray-400 bg-opacity-15 text-black  placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500"
 								value={searchTerm}
 								onChange={handleSearch}
 							/>
-							<Search className="absolute left-3 top-2.5 text-gray-50" size={18} />
+							<Search className="absolute left-3 top-2.5 text-gray-600" size={18} />
 						</div>
 						<button
 							onClick={openCreateModal}
-							className={`${
-								apiAvailable ? "bg-primary hover:bg-primary/85" : "bg-gray-600 cursor-not-allowed"
-							} text-white px-4 py-2 rounded-lg flex items-center`}
+							className={`${apiAvailable ? "bg-[#118ac1] hover:bg-[#118ac1]/50" : "bg-gray-600 cursor-not-allowed"} text-white px-4 py-2 rounded-lg flex items-center`}
 						>
 							<Plus size={18} className="mr-1" /> Add User
 						</button>
@@ -279,26 +277,25 @@ const UsersTable = () => {
 						<>
 							<table className="min-w-full border-separate border-spacing-y-1 border-spacing-x-0">
 								<thead>
-									<tr className="bg-emerald-600">
-										<th className="px-6 py-3 text-left text-sm  font-medium text-gray-100 uppercase tracking-wider rounded-s-lg">
+									<tr className="bg-gray-900">
+										<th className='px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider rounded-s-lg'>
 											Name
 										</th>
-										<th className="px-6 py-3 text-left text-sm  font-medium text-gray-100 uppercase tracking-wider">
+										<th className='px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider'>
 											Email
 										</th>
-										<th className="px-6 py-3 text-left text-sm  font-medium text-gray-100 uppercase tracking-wider">
+										<th className='px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider'>
 											Role
 										</th>
-										<th className="px-6 py-3 text-left text-sm  font-medium text-gray-100 uppercase tracking-wider">
+										<th className='px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider'>
 											Status
 										</th>
-										<th className="px-6 py-3 text-left text-sm  font-medium text-gray-100 uppercase tracking-wider rounded-e-lg">
+										<th className='px-6 py-3 text-left text-xs font-medium text-gray-100 uppercase tracking-wider rounded-e-lg'>
 											Actions
 										</th>
 									</tr>
 								</thead>
-
-								<tbody className="divide-y divide-gray-700">
+								<tbody className='divide-y divide-gray-700'>
 									{filteredUsers.length === 0 ? (
 										<tr>
 											<td colSpan="5" className="px-6 py-4 text-center text-gray-900">
@@ -306,56 +303,39 @@ const UsersTable = () => {
 											</td>
 										</tr>
 									) : (
-										currentUsers.map((user , index) => (
+										currentUsers.map((user, index) => (
 											<motion.tr
 												key={user.id}
 												initial={{ opacity: 0 }}
 												animate={{ opacity: 1 }}
 												transition={{ duration: 0.3 }}
-												className={`${index % 2 === 0 ? 'bg-success' : 'bg-success-400'} overflow-hidden rounded-xl`}
+												className={`${index % 2 === 0 ? 'bg-gray-400 bg-opacity-10' : 'bg-gray-100'} overflow-hidden rounded-xl`}
 											>
 												<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 rounded-l-xl">
-													<div className="flex gap-2 items-cente">
-														<div className="ml-4">
-															<div className="text-sm font-medium text-gray-900">{user.name}</div>
-														</div>
-													</div>
+													{user.name}
 												</td>
-
-												<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-													<div className="text-sm text-gray-900">{user.email}</div>
+												<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+													{user.email}
 												</td>
-												<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-													<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-blue-100">
-														{user.role}
-													</span>
+												<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+													{user.role}
 												</td>
-
-												<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-													<span
-														className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-															user.status === "active"
-																? "bg-green-800 text-green-100"
-																: "bg-red-800 text-red-100"
-														}`}
+												<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+													{user.status}
+												</td>
+												<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 rounded-r-xl'>
+													<button
+														className='text-blue-900 hover:text-blue-500 mr-2'
+														onClick={() => openEditModal(user)}
 													>
-														{user.status}
-													</span>
-												</td>
-
-												<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 rounded-r-xl">
-												<button 
-                                                        className='text-green-900 hover:text-green-500 mr-2'
-                                                        onClick={() => openEditModal(user)}
-                                                    >
-                                                        <Edit size={20} />
-                                                    </button>
-                                                    <button 
-                                                        className='text-red-700 hover:text-red-500'
-                                                        onClick={() => openDeleteModal(user)}
-                                                    >
-                                                        <Trash2 size={20} />
-                                                    </button>
+														<Edit size={20} />
+													</button>
+													<button
+														className='text-red-700 hover:text-red-500'
+														onClick={() => openDeleteModal(user)}
+													>
+														<Trash2 size={20} />
+													</button>
 												</td>
 											</motion.tr>
 										))
@@ -366,14 +346,14 @@ const UsersTable = () => {
 							{/* Pagination Controls */}
 							{filteredUsers.length > 0 && (
 								<div className="flex items-center justify-between mt-4 px-2">
-									<div className="text-sm text-gray-700">
+									<div className="text-md text-gray-900">
 										Showing {indexOfFirstUser + 1} to {Math.min(indexOfLastUser, filteredUsers.length)} of {filteredUsers.length} users
 									</div>
 									<div className="flex space-x-2">
-										<button 
-											onClick={prevPage} 
+										<button
+											onClick={prevPage}
 											disabled={currentPage === 1}
-											className={`p-2 rounded-md ${currentPage === 1 ? 'text-gray-50 cursor-not-allowed' : 'text-gray-300 hover:bg-emerald-700'}`}
+											className={`p-2 rounded-md ${currentPage === 1 ? 'text-gray-900 cursor-not-allowed' : 'text-gray-50 hover:bg-gray-900'}`}
 										>
 											<ChevronLeft size={18} />
 										</button>
@@ -384,21 +364,17 @@ const UsersTable = () => {
 												<button
 													key={number + 1}
 													onClick={() => paginate(number + 1)}
-													className={`px-3 py-1 rounded-md ${
-														currentPage === number + 1 
-															? 'bg-emerald-600 text-white' 
-                                                            : 'text-gray-300 hover:bg-emerald-700'
-													}`}
+													className={`px-3 py-1 rounded-md ${currentPage === number + 1 ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700'}`}
 												>
 													{number + 1}
 												</button>
 											))}
 										</div>
 										
-										<button 
-											onClick={nextPage} 
+										<button
+											onClick={nextPage}
 											disabled={currentPage === totalPages}
-											className={`p-2 rounded-md ${currentPage === totalPages ? 'text-gray-600 cursor-not-allowed' : 'text-gray-300 hover:bg-emerald-700'}`}
+											className={`p-2 rounded-md ${currentPage === totalPages ? 'text-gray-900 cursor-not-allowed' : 'text-gray-50 hover:bg-gray-700'}`}
 										>
 											<ChevronRight size={18} />
 										</button>
@@ -419,7 +395,7 @@ const UsersTable = () => {
 				<form onSubmit={handleCreateUser}>
 					<div className="space-y-4">
 						<div>
-							<label htmlFor="name" className="block text-sm font-medium text-gray-300">
+							<label htmlFor="name" className="block text-sm font-medium text-gray-900">
 								Name
 							</label>
 							<input
@@ -429,12 +405,12 @@ const UsersTable = () => {
 								value={formData.name}
 								onChange={handleInputChange}
 								required
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+								className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
 							/>
 						</div>
 
 						<div>
-							<label htmlFor="email" className="block text-sm font-medium text-gray-300">
+							<label htmlFor="email" className="block text-sm font-medium text-gray-900">
 								Email
 							</label>
 							<input
@@ -444,12 +420,12 @@ const UsersTable = () => {
 								value={formData.email}
 								onChange={handleInputChange}
 								required
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+								className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
 							/>
 						</div>
 
 						<div>
-							<label htmlFor="role" className="block text-sm font-medium text-gray-300">
+							<label htmlFor="role" className="block text-sm font-medium text-gray-900">
 								Role
 							</label>
 							<select
@@ -457,7 +433,7 @@ const UsersTable = () => {
 								name="role"
 								value={formData.role}
 								onChange={handleInputChange}
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+								className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
 							>
 								<option value="customer">Customer</option>
 								<option value="moderator">Moderator</option>
@@ -466,7 +442,7 @@ const UsersTable = () => {
 						</div>
 
 						<div>
-							<label htmlFor="status" className="block text-sm font-medium text-gray-300">
+							<label htmlFor="status" className="block text-sm font-medium text-gray-900">
 								Status
 							</label>
 							<select
@@ -474,7 +450,7 @@ const UsersTable = () => {
 								name="status"
 								value={formData.status}
 								onChange={handleInputChange}
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+								className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
 							>
 								<option value="active">Active</option>
 								<option value="inactive">Inactive</option>
@@ -492,7 +468,7 @@ const UsersTable = () => {
 						</button>
 						<button
 							type="submit"
-							className="px-4 py-2 bg-green-900 text-white rounded-md hover:bg-emerald-700"
+							className="px-4 py-2 bg-[#118ac1] text-white rounded-md hover:bg-[#118ac1]/50"
 						>
 							Create User
 						</button>
@@ -519,7 +495,7 @@ const UsersTable = () => {
 								value={formData.name}
 								onChange={handleInputChange}
 								required
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+								className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black  shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
 							/>
 						</div>
 
@@ -534,7 +510,7 @@ const UsersTable = () => {
 								value={formData.email}
 								onChange={handleInputChange}
 								required
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+								className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black  shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
 							/>
 						</div>
 
@@ -547,7 +523,7 @@ const UsersTable = () => {
 								name="role"
 								value={formData.role}
 								onChange={handleInputChange}
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+								className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black  shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
 							>
 								<option value="customer">Customer</option>
 								<option value="moderator">Moderator</option>
@@ -564,7 +540,7 @@ const UsersTable = () => {
 								name="status"
 								value={formData.status}
 								onChange={handleInputChange}
-								className="mt-1 block w-full h-8 rounded-md bg-emerald-800 border-emerald-100 text-white shadow-sm focus:border-none outline-none focus:ring-2 ring-green-700"
+								className="mt-1 block w-full h-8 rounded-md bg-gray-400 bg-opacity-15 border-gray-100 text-black  shadow-sm focus:border-none outline-none focus:ring-2 ring-gray-400"
 							>
 								<option value="active">Active</option>
 								<option value="inactive">Inactive</option>
@@ -582,7 +558,7 @@ const UsersTable = () => {
 						</button>
 						<button
 							type="submit"
-							className="px-4 py-2 bg-green-900 text-white rounded-md hover:bg-emerald-700"
+							className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-500"
 						>
 							Update User
 						</button>
@@ -598,7 +574,7 @@ const UsersTable = () => {
 			>
 				{currentUser && (
 					<div>
-						<p className="text-gray-300 mb-4">
+						<p className="text-gray-900 mb-4">
 							Are you sure you want to delete <span className="font-semibold">{currentUser.name}</span>? This action cannot be undone.
 						</p>
 

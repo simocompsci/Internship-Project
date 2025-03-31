@@ -81,12 +81,12 @@ const SalesOverviewChart = () => {
 
 	return (
 		<motion.div
-			className='bg-success bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6'
+			className='bg-gray-300 shadow-lg rounded-xl p-6'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}
 		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>Sales Overview</h2>
+			<h2 className='text-lg font-medium mb-4 text-gray-800'>Sales Overview</h2>
 
 			{loading ? (
 				<div className="flex justify-center items-center h-64">
@@ -100,12 +100,16 @@ const SalesOverviewChart = () => {
 				<div className='h-80'>
 					<ResponsiveContainer width={"100%"} height={"100%"}>
 						<LineChart data={salesData}>
-							<CartesianGrid strokeDasharray='3 3' stroke='white' />
+							<CartesianGrid 
+							strokeDasharray='2 4' 
+							stroke='rgba(0, 0, 0, 0.2)' 
+							strokeWidth={0.5}
+						/>
 						
 							<XAxis 
 								dataKey={"name"} 
-								stroke='white'
-								tick={{ fontSize: 10 }}
+								stroke='black'
+								tick={{ fontSize: 10, fill: 'black' }}
 								tickMargin={10}
 								padding={{ left: 0, right: 0 }}
 								angle={-45}
@@ -114,28 +118,31 @@ const SalesOverviewChart = () => {
 								interval={0}
 							/>
 							<YAxis 
-								stroke='white'
+								stroke='black'
 								tickFormatter={(value) => `$${value.toLocaleString()}`}
 								domain={[0, 120000]}
-								tick={{ fontSize: 10 }}
+								tick={{ fontSize: 10, fill: 'black' }}
 								tickMargin={10}
 								ticks={[0, 20000, 40000, 60000, 80000, 100000, 120000 , 140000 , 160000]}
 							/>
 							<Tooltip
 								contentStyle={{
-									backgroundColor: "rgba(26, 110, 57, 0.8)",
-									borderColor: "emerald",
+									backgroundColor: "#72b7ef",
+									borderRadius: "8px",
+									boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+									border: "none",
+									padding: "12px"
 								}}
-								itemStyle={{ color: "white" }}
+								itemStyle={{ color: "#1F2937" }}
 								formatter={(value) => [`$${value.toLocaleString()}`, "Sales"]}
 							/>
 							<Line
 								type='monotone'
 								dataKey='sales'
-								stroke='green'
+								stroke='#72b7ef'
 								strokeWidth={3}
 								
-								activeDot={{ r: 8, strokeWidth: 2 }}
+								activeDot={{ r: 8, strokeWidth: 2, stroke: 'black' }}
 							/>
 						</LineChart>
 					</ResponsiveContainer>

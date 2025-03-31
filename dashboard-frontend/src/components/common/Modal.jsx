@@ -56,13 +56,13 @@ const Modal = ({ isOpen, onClose, title, children }) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="relative bg-emerald-600 rounded-lg shadow-xl max-w-md w-full mx-4 my-8 overflow-hidden border border-emerald-700"
+            className="relative bg-gray-300 rounded-lg shadow-xl max-w-md w-full mx-4 my-8 overflow-hidden border border-gray-400"
           >
-            <div className="flex items-center justify-between p-4 border-b border-emerald-700">
-              <h3 className="text-lg font-semibold text-gray-100">{title}</h3>
+            <div className="flex items-center justify-between p-4 border-b border-gray-400">
+              <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
               <button
                 onClick={onClose}
-                className="text-gray-400 hover:text-gray-200 focus:outline-none"
+                className="text-gray-900 hover:text-gray-500 focus:outline-none"
               >
                 <X size={20} />
               </button>

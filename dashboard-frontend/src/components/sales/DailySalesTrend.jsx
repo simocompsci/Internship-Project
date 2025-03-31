@@ -41,13 +41,13 @@ const DailySalesTrend = () => {
 
 	return (
 		<motion.div
-			className='bg-success bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6'
+			className='bg-gray-300 shadow-lg rounded-xl p-6'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.4 }}
 		>
 			<div className="flex justify-between items-center mb-4">
-				<h2 className='text-xl font-semibold text-gray-100'>Daily Sales Trend</h2>
+				<h2 className='text-xl font-semibold text-black'>Daily Sales Trend</h2>
 				{error && (
 					<button
 						onClick={fetchDailySalesData}
@@ -74,11 +74,10 @@ const DailySalesTrend = () => {
 				) : (
 					<ResponsiveContainer>
 						<BarChart data={dailySalesData}>
-							<CartesianGrid strokeDasharray='3 3' stroke='white' />
+						<CartesianGrid strokeDasharray='4 4' stroke='#1f2937' strokeOpacity={0.2} />
 							<XAxis
 								dataKey='name'
-								stroke='white'
-								// Ensure all days are shown
+								stroke='black'
 								tickSize={11}
 								interval={0}
 								angle={-45}
@@ -86,21 +85,25 @@ const DailySalesTrend = () => {
 								height={60}
 							/>
 							<YAxis
-								stroke='white'
+								stroke='black'
 								tickSize={11}
-								// Set fixed domain from 0 to 10000
 								domain={[0, 10000]}
 								tickFormatter={(value) => `$${value}`}
 							/>
 							<Tooltip
 								contentStyle={{
-									backgroundColor: "rgba(26, 110, 57, 0.8)",
-									borderColor: "emerald",
+									backgroundColor: "#72b7ef",
+									borderRadius: "8px",
+									boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+									border: "none",
+									padding: "12px"
 								}}
-								itemStyle={{ color: "white" }}
+								itemStyle={{ color: "#1F2937" }}
 								formatter={(value) => [`$${value.toLocaleString()}`, "Sales"]}
 							/>
-							<Bar dataKey='sales' fill='#8bd7f9' />
+							<Bar dataKey='sales'
+							fill='#8884d8'
+							radius={[4, 4, 0, 0]} />
 						</BarChart>
 					</ResponsiveContainer>
 				)}

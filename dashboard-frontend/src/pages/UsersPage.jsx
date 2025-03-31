@@ -54,25 +54,25 @@ const UsersPage = () => {
 						name='Total Users'
 						icon={UsersIcon}
 						value={loading ? "Loading..." : userStats.totalUsers?.toLocaleString()}
-						color='green'
+						color='#72b7ef'
 					/>
 					<StatCard
 						name='New Users Today'
 						icon={UserPlus}
 						value={loading ? "Loading..." : userStats.newUsersToday}
-						color='green'
+						color='#72b7ef'
 					/>
 					<StatCard
 						name='Active Users'
 						icon={UserCheck}
 						value={loading ? "Loading..." : userStats.activeUsers?.toLocaleString()}
-						color='green'
+						color='#72b7ef'
 					/>
 					<StatCard
 						name='Churn Rate'
 						icon={UserX}
 						value={loading ? "Loading..." : userStats.churnRate}
-						color='green'
+						color='#72b7ef'
 					/>
 				</motion.div>
 

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell } from "recharts";
 
-const COLORS =  ["#8bd7f9", "#4ec0f4", "#3e9eca", "#80d6fd", "#427084" , "#1c5f7c" , "#089bda"];
+const COLORS = ["#72b7ef", "#439ee7", "#1c95a1", "#3b7b82", "#118ac1", "#8bd7f9", "#1a6e39"];
 
 const SALES_CHANNEL_DATA = [
 	{ name: "Website", value: 45600 },
@@ -16,28 +16,44 @@ const SALES_CHANNEL_DATA = [
 const SalesChannelChart = () => {
 	return (
 		<motion.div
-			className='bg-success bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 lg:col-span-2'
+			className='bg-gray-300 shadow-lg rounded-xl p-6 lg:col-span-2'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.4 }}
 		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>Sales by Channel</h2>
+			<h2 className='text-lg font-medium mb-4 text-gray-800'>Sales by Channel</h2>
 
 			<div className='h-80'>
-				<ResponsiveContainer>
+				<ResponsiveContainer width={"100%"} height={"100%"}>
 					<BarChart data={SALES_CHANNEL_DATA}>
-						<CartesianGrid strokeDasharray='3 3' stroke='white' />
-						<XAxis dataKey='name' stroke='white' />
-						<YAxis stroke='white' />
+						<CartesianGrid strokeDasharray='4 4' stroke='#1f2937' strokeOpacity={0.2} />
+						<XAxis 
+							dataKey='name' 
+							stroke='#000000'
+							tick={{ fontSize: 13, fill: '#000000' }}
+						/>
+						<YAxis
+							stroke='#000000'
+							tick={{ fontSize: 14, fill: '#000000' }}
+							tickFormatter={(value) => `$${value.toLocaleString()}`}
+						/>
 						<Tooltip
 							contentStyle={{
-								backgroundColor: "rgba(26, 110, 57, 0.8)",
-								borderColor: "emerald",
+								backgroundColor: "#72b7ef",
+								borderRadius: "8px",
+								boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+								border: "none",
+								padding: "12px"
 							}}
-							itemStyle={{ color: "white" }}
+							itemStyle={{ color: "#1F2937" }}
+							formatter={(value) => [`$${value.toLocaleString()}`, "Sales"]}
 						/>
 						<Legend />
-						<Bar dataKey={"value"} fill='#8884d8'>
+						<Bar 
+							dataKey={"value"} 
+							fill='#8884d8'
+							radius={[4, 4, 0, 0]}
+						>
 							{SALES_CHANNEL_DATA.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 							))}

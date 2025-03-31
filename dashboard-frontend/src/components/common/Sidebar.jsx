@@ -7,14 +7,14 @@ const SIDEBAR_ITEMS = [
 	{
 		name: "Overview",
 		icon: BarChart2,
-		color: "white",
+		color: "black",
 		href: "/",
 	},
-	{ name: "Products", icon: ShoppingBag, color: "white", href: "/products" },
-	{ name: "Users", icon: Users, color: "white", href: "/users" },
-	{ name: "Sales", icon: DollarSign, color: "white", href: "/sales" },
-	{ name: "Orders", icon: ShoppingCart, color: "white", href: "/orders" },
-	{ name: "Analytics", icon: TrendingUp, color: "white", href: "/analytics" },
+	{ name: "Products", icon: ShoppingBag, color: "black", href: "/products" },
+	{ name: "Users", icon: Users, color: "black", href: "/users" },
+	{ name: "Sales", icon: DollarSign, color: "black", href: "/sales" },
+	{ name: "Orders", icon: ShoppingCart, color: "black", href: "/orders" },
+	{ name: "Analytics", icon: TrendingUp, color: "black", href: "/analytics" },
 ];
 
 const Sidebar = () => {
@@ -27,12 +27,12 @@ const Sidebar = () => {
 			}`}
 			animate={{ width: isSidebarOpen ? 256 : 80 }}
 		>
-			<div className='h-full bg-emerald-600 bg-opacity-50 backdrop-blur-md p-4 flex flex-col border-r border-r-emerald-700'>
+			<div className='h-full bg-white p-4 flex flex-col border-r border-r-gray-300'>
 				<motion.button
 					whileHover={{ scale: 1.1 }}
 					whileTap={{ scale: 0.9 }}
 					onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-					className='p-2 rounded-full hover:bg-emerald-700 transition-colors max-w-fit'
+					className='p-2 rounded-full text-gray-900 hover:bg-gray-900 hover:text-white transition-colors max-w-fit'
 				>
 					<Menu size={24} />
 				</motion.button>
@@ -40,16 +40,17 @@ const Sidebar = () => {
 				<nav className='mt-8 flex-grow'>
 					{SIDEBAR_ITEMS.map((item) => (
 						<Link key={item.href} to={item.href}>
-							<motion.div className='flex items-center p-4 text-base font-medium rounded-lg hover:bg-emerald-700 transition-colors mb-2'>
-								<item.icon size={20} style={{ color: item.color, minWidth: "20px" }} />
+							<motion.div className='flex items-center p-4 text-base font-medium rounded-lg hover:bg-gray-900 text-gray-900 hover:text-white transition-colors mb-2 group'>
+								<item.icon size={20} style={{ minWidth: "20px" }} className="text-gray-900 group-hover:text-white transition-colors" />
 								<AnimatePresence>
 									{isSidebarOpen && (
 										<motion.span
-											className='ml-4 whitespace-nowrap'
+											className='ml-4 text-gray-900 whitespace-nowrap group-hover:text-white'
 											initial={{ opacity: 0, width: 0 }}
 											animate={{ opacity: 1, width: "auto" }}
 											exit={{ opacity: 0, width: 0 }}
 											transition={{ duration: 0.2, delay: 0.3 }}
+											
 										>
 											{item.name}
 										</motion.span>

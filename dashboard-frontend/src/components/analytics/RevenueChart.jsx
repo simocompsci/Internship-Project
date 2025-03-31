@@ -55,13 +55,13 @@ const RevenueChart = () => {
 
 	return (
 		<motion.div
-			className='bg-success bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg rounded-xl p-6 mb-8'
+			className='bg-gray-300 shadow-lg rounded-xl p-6 mb-8'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}
 		>
 			<div className='flex justify-between items-center mb-6'>
-				<h2 className='text-xl font-semibold text-gray-100'>Revenue vs Target</h2>
+				<h2 className='text-xl font-semibold text-black'>Revenue vs Target</h2>
 				<div className="flex items-center">
 					{error && (
 						<button
@@ -72,7 +72,7 @@ const RevenueChart = () => {
 						</button>
 					)}
 					<select
-						className='bg-emerald-700 text-white rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-emerald-500'
+						className='bg-gray-400 bg-opacity-15 text-black rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-gray-400'
 						value={selectedTimeRange}
 						onChange={(e) => setSelectedTimeRange(e.target.value)}
 					>
@@ -100,37 +100,66 @@ const RevenueChart = () => {
 				) : (
 					<ResponsiveContainer>
 						<AreaChart data={revenueData}>
-							<CartesianGrid strokeDasharray='3 3' stroke='white' />
-							<XAxis dataKey='month' stroke='white' />
+							<defs>
+								<linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
+									<stop offset="5%" stopColor="#10B981" stopOpacity={0.8}/>
+									<stop offset="95%" stopColor="#10B981" stopOpacity={0.1}/>
+								</linearGradient>
+								<linearGradient id="targetGradient" x1="0" y1="0" x2="0" y2="1">
+									<stop offset="5%" stopColor="#6366F1" stopOpacity={0.8}/>
+									<stop offset="95%" stopColor="#6366F1" stopOpacity={0.1}/>
+								</linearGradient>
+							</defs>
+							<CartesianGrid strokeDasharray='4 4' stroke='#1f2937' strokeOpacity={0.2} />
+							<XAxis
+								dataKey="month"
+								stroke="black"
+								tick={{ fill: 'black', fontSize: 12 }}
+								axisLine={{ stroke: '#000000' }}
+							/>
 							<YAxis
 								tickSize={10}
-								stroke='white'
+								stroke="black"
 								tickFormatter={(value) => `$${value.toLocaleString()}`}
+								tick={{ fill: 'black', fontSize: 12 }}
+								axisLine={{ stroke: '#000000' }}
 							/>
 							<Tooltip
 								contentStyle={{
-									backgroundColor: "rgba(26, 110, 57, 0.8)",
-									borderColor: "emerald",
+									backgroundColor: "#72b7ef",
+									borderRadius: "8px",
+									boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+									border: "none",
+									padding: "12px"
 								}}
-								itemStyle={{ color: "#E5E7EB" }}
+								itemStyle={{ color: "#1F2937" }}
 								formatter={(value) => [`$${value.toLocaleString()}`, ""]}
+								labelStyle={{ color: "#4B5563", marginBottom: "4px" }}
 							/>
-							<Legend />
-							<Area
-								type='monotone'
-								dataKey='revenue'
-								name='Actual Revenue'
-								stroke='green'
-								fill='white'
-								fillOpacity={0.3}
+							<Legend
+								verticalAlign="top"
+								height={36}
+								iconType="circle"
 							/>
 							<Area
-								type='monotone'
-								dataKey='target'
-								name='Target Revenue'
-								stroke='green'
-								fill='green'
-								fillOpacity={0.3}
+								type="monotone"
+								dataKey="revenue"
+								name="Actual Revenue"
+								stroke="#10B981"
+								fill="url(#revenueGradient)"
+								strokeWidth={2}
+								dot={{ stroke: '#10B981', strokeWidth: 2, r: 4, fill: '#fff' }}
+								activeDot={{ r: 6, stroke: '#10B981', strokeWidth: 2, fill: '#fff' }}
+							/>
+							<Area
+								type="monotone"
+								dataKey="target"
+								name="Target Revenue"
+								stroke="#6366F1"
+								fill="url(#targetGradient)"
+								strokeWidth={2}
+								dot={{ stroke: '#6366F1', strokeWidth: 2, r: 4, fill: '#fff' }}
+								activeDot={{ r: 6, stroke: '#6366F1', strokeWidth: 2, fill: '#fff' }}
 							/>
 						</AreaChart>
 					</ResponsiveContainer>

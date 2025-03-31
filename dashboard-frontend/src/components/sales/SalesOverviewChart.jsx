@@ -42,13 +42,13 @@ const SalesOverviewChart = () => {
 
 	return (
 		<motion.div
-			className='bg-success bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 mb-8'
+			className='bg-gray-300 shadow-lg rounded-xl p-6 mb-8'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}
 		>
 			<div className='flex items-center justify-between mb-6'>
-				<h2 className='text-xl font-semibold text-gray-100'>Sales Overview</h2>
+				<h2 className='text-xl font-semibold text-black'>Sales Overview</h2>
 
 				<div className="flex items-center">
 					{error && (
@@ -60,8 +60,8 @@ const SalesOverviewChart = () => {
 						</button>
 					)}
 					<select
-						className='bg-success-700 text-white rounded-md px-3 py-1 focus:outline-none focus:ring-2 
-						focus:ring-success-500'
+						className='bg-gray-400 bg-opacity-15 text-black rounded-md px-3 py-1 focus:outline-none focus:ring-2 
+						focus:ring-gray-400'
 						value={selectedTimeRange}
 						onChange={(e) => setSelectedTimeRange(e.target.value)}
 					>
@@ -84,18 +84,18 @@ const SalesOverviewChart = () => {
 				{loading ? (
 					<div className="flex items-center justify-center h-full">
 						<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
-						<p className="ml-2 text-gray-400">Loading chart data...</p>
+						<p className="ml-2 text-black">Loading chart data...</p>
 					</div>
 				) : (
 					<ResponsiveContainer>
 						<AreaChart data={monthlySalesData}>
-							<CartesianGrid strokeDasharray='3 3' stroke='white' />
-							<XAxis tick={{ fontSize: 13 }}
+						<CartesianGrid strokeDasharray='4 4' stroke='#1f2937' strokeOpacity={0.2} />
+							<XAxis tick={{ fontSize: 13, fill: 'black' }}
 								dataKey='name'
 								stroke='white'
 							/>
 							<YAxis
-								tick={{ fontSize: 14 }}
+								tick={{ fontSize: 14, fill: 'black' }}
 								stroke='white'
 								domain={[0, 150000]}
 								ticks={[0, 30000, 60000, 90000, 120000, 150000]}
@@ -103,13 +103,16 @@ const SalesOverviewChart = () => {
 							/>
 							<Tooltip
 								contentStyle={{
-									backgroundColor: "rgba(26, 110, 57, 0.8)",
-									borderColor: "emerald",
+									backgroundColor: "#72b7ef",
+									borderRadius: "8px",
+									boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+									border: "none",
+									padding: "12px"
 								}}
-								itemStyle={{ color: "white" }}
+								itemStyle={{ color: "#1F2937" }}
 								formatter={(value) => [`$${value.toLocaleString()}`, "Sales"]}
 							/>
-							<Area type='monotone' dataKey='sales' stroke='green' fill='white' fillOpacity={0.3} />
+							<Area type='monotone' dataKey='sales' stroke='#72b7ef' fill='#118ac1' fillOpacity={0.2} />
 						</AreaChart>
 					</ResponsiveContainer>
 				)}

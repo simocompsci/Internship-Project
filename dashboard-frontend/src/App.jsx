@@ -11,11 +11,11 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 
 function App() {
 	return (
-		<div className='flex h-screen  bg-emerald-600 text-gray-100 overflow-hidden'>
+		<div className='flex h-screen bg-white text-gray-800 overflow-hidden'>
 			{/* BG */}
 			<div className='fixed inset-0 z-0'>
-				<div className='absolute bg-gray-400' />
-				<div className='absolute inset-0 backdrop-blur-sm' />
+				<div className='absolute bg-white' />
+				<div className='absolute inset-0' />
 			</div>
 
 			<Sidebar />

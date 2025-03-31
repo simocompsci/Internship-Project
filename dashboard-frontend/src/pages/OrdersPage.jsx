@@ -5,8 +5,8 @@ import Header from "../components/common/Header";
 import StatCard from "../components/common/StatCard";
 import OrderDistribution from "../components/orders/OrderDistribution";
 import OrdersTable from "../components/orders/OrdersTable";
-import { useState , useEffect } from "react";
-import { handleApiError , fallbackData } from "../utils/apiUtils";
+import { useState, useEffect } from "react";
+import { handleApiError, fallbackData } from "../utils/apiUtils";
 import { orderService } from "../services/api";
 
 const OrdersPage = () => {
@@ -28,11 +28,11 @@ const OrdersPage = () => {
 		try {
 			console.log("Fetching stats from API...");
 			const response = await orderService.getStats();
-			
+
 
 			// Ensure we're setting an array for users and filteredUsers
 			const OrdersstatsData = response.data;
-			
+
 			setordersStats(OrdersstatsData);
 			setApiAvailable(true);
 		} catch (err) {
@@ -63,23 +63,23 @@ const OrdersPage = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					<StatCard name='Total Orders' icon={ShoppingBag} value={ordersStats.totalOrders} color='green' />
-					<StatCard name='Pending Orders' icon={Clock} value={ordersStats.pendingOrders} color='green' />
+					<StatCard name='Total Orders' icon={ShoppingBag} value={ordersStats.totalOrders} color='#72b7ef' />
+					<StatCard name='Pending Orders' icon={Clock} value={ordersStats.pendingOrders} color='#72b7ef' />
 					<StatCard
 						name='Completed Orders'
 						icon={CheckCircle}
 						value={ordersStats.completedOrders}
-						color='green'
+						color='#72b7ef'
 					/>
-					<StatCard name='Total Revenue' icon={DollarSign} value={ordersStats.totalRevenue} color='green' />
+					<StatCard name='Total Revenue' icon={DollarSign} value={ordersStats.totalRevenue} color='#72b7ef' />
 				</motion.div>
 
 				<div className='grid grid-cols-1 lg:grid-cols-1 gap-8 mb-8'>
-				<OrdersTable />
-					
+					<OrdersTable />
+
 				</div>
 				<OrderDistribution />
-				
+
 			</main>
 		</div>
 	);

@@ -7,7 +7,7 @@ import ChannelPerformance from "../components/analytics/ChannelPerformance";
 
 const AnalyticsPage = () => {
 	return (
-		<div className='flex-1 overflow-auto relative z-10 bg-emerald-600'>
+		<div className='flex-1 overflow-auto relative z-10 bg-white'>
 			<Header title={"Analytics Dashboard"} />
 
 			<main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
