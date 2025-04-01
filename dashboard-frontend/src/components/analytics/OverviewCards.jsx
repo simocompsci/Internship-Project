@@ -14,7 +14,7 @@ const OverviewCards = () => {
 			{overviewData.map((item, index) => (
 				<motion.div
 					key={item.name}
-					className='bg-gray-100 shadow-lg rounded-xl p-6'
+					className='bg-gray-100 bg-opacity-50 border border-gray-200 rounded-xl p-6'
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: index * 0.1 }}
