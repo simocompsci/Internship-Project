@@ -21,6 +21,7 @@ const ProductsTable = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
+    const [refresh , setRefresh] = useState(0);
     const [formData, setFormData] = useState({
         name: "",
         category: "",
@@ -32,7 +33,7 @@ const ProductsTable = () => {
     // Fetch products on component mount
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [refresh]);
 
     const fetchProducts = async () => {
         setLoading(true);
@@ -97,6 +98,7 @@ const ProductsTable = () => {
             setProducts([...products, response.data]);
             setFilteredProducts([...filteredProducts, response.data]);
             setIsCreateModalOpen(false);
+            setRefresh(prev=>prev+1);
             // Reset form
             setFormData({
                 name: "",
@@ -140,6 +142,7 @@ const ProductsTable = () => {
                     product.category.toLowerCase().includes(searchTerm)
             ));
             setIsEditModalOpen(false);
+            setRefresh(prev=>prev+1);
         } catch (err) {
             console.error("Error updating product:", err);
             alert("Failed to update product. Please try again.");
